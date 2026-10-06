@@ -28,8 +28,10 @@ class JwtServiceTest {
 
         assertThat(token).isNotBlank();
         assertThat(jwtService.extractUsername(token)).isEqualTo("admin@test.com");
-        assertThat(jwtService.extractClaim(token, c -> c.get("rol", String.class))).isEqualTo("ADMIN");
-        assertThat(jwtService.extractClaim(token, c -> c.get("id", Long.class))).isEqualTo(5L);
+        String rol = jwtService.extractClaim(token, c -> c.get("rol", String.class));
+        Long id = jwtService.extractClaim(token, c -> c.get("id", Long.class));
+        assertThat(rol).isEqualTo("ADMIN");
+        assertThat(id).isEqualTo(5L);
     }
 
     @Test

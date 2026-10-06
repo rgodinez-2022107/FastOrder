@@ -228,8 +228,11 @@ class PedidoFlowIntegrationTest {
     @Test
     void cancelarPedidoPendienteRestauraStock() throws Exception {
         long productoId = crearProducto(1, 10, "10.00");
-        int stockTrasCompra = productoRepository.findById(productoId).orElseThrow().getStock();
+        int stockOriginal = productoRepository.findById(productoId).orElseThrow().getStock();
         long pedidoId = crearPedido(1, productoId, 3);
+
+        assertThat(productoRepository.findById(productoId).orElseThrow().getStock())
+                .isEqualTo(stockOriginal - 3);
 
         mockMvc.perform(patch("/api/v1/pedidos/" + pedidoId + "/cancelar")
                         .header("Authorization", "Bearer " + tokenCliente))
@@ -237,7 +240,7 @@ class PedidoFlowIntegrationTest {
                 .andExpect(jsonPath("$.estado").value("CANCELADO"));
 
         assertThat(productoRepository.findById(productoId).orElseThrow().getStock())
-                .isEqualTo(stockTrasCompra + 3);
+                .isEqualTo(stockOriginal);
     }
 
     @Test
