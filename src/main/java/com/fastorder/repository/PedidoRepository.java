@@ -25,11 +25,7 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 
     @Query(value = "select p.id from Pedido p "
             + "where (p.estado = com.fastorder.enums.EstadoPedido.PENDIENTE and p.repartidor is null) "
-            + "or (p.estado = com.fastorder.enums.EstadoPedido.EN_CAMINO and p.repartidor.id = :repartidorId) "
-            + "order by p.fechaPedido asc, p.id asc",
-            countQuery = "select count(p) from Pedido p "
-            + "where (p.estado = com.fastorder.enums.EstadoPedido.PENDIENTE and p.repartidor is null) "
-            + "or (p.estado = com.fastorder.enums.EstadoPedido.EN_CAMINO and p.repartidor.id = :repartidorId)")
+
     Page<Long> findIdsDisponiblesParaRepartidor(@Param("repartidorId") Long repartidorId, Pageable pageable);
 
     @Query(value = "select p.id from Pedido p "
@@ -42,8 +38,7 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
     Page<Long> findIdsDisponiblesParaAdmin(Pageable pageable);
 
     @Query("select distinct p from Pedido p "
-            + "left join fetch p.detalles d "
-            + "left join fetch d.producto "
+
             + "where p.id in :ids")
     List<Pedido> findAllWithDetallesByIdIn(@Param("ids") Collection<Long> ids);
 }
