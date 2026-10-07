@@ -3,7 +3,7 @@
 
 # CONFIGURACIÓN GENERAL
 
-BASE_URL="http://localhost:8080/api/v1"
+BASE_URL="http://localhost:8085/api/v1"
 ADMIN_EMAIL="admin@fastorder.com"
 ADMIN_PASS="Admin123*"
 CLIENTE_EMAIL="cliente@fastorder.com"
