@@ -69,7 +69,7 @@ public class PedidoService {
 
     @Transactional
     public PedidoResponse crearPedido(PedidoCreateRequest request, UsuarioPrincipal principal) {
-        if (request.getProductos() == null || request.getProductos().isEmpty()) {
+        if ((request.getItems() == null || request.getItems().isEmpty()) && (request.getProductos() == null || request.getProductos().isEmpty())) {
             throw new IllegalArgumentException("El pedido debe incluir al menos un producto");
         }
 
@@ -79,7 +79,13 @@ public class PedidoService {
         Comercio comercio = comercioRepository.findById(request.getComercioId())
                 .orElseThrow(() -> new ResourceNotFoundException("Comercio", request.getComercioId()));
 
-        Map<Long, Integer> cantidadesPorProducto = agruparCantidades(request.getProductos());
+        List<DetallePedidoCreateRequest> itemsReq = (request.getItems() != null && !request.getItems().isEmpty())
+                ? request.getItems()
+                : request.getProductos();
+        if (itemsReq == null || itemsReq.isEmpty()) {
+            throw new IllegalArgumentException("El pedido debe incluir al menos un producto");
+        }
+        Map<Long, Integer> cantidadesPorProducto = agruparCantidades(itemsReq);
         List<Long> productoIds = cantidadesPorProducto.keySet().stream().sorted().toList();
 
         List<Producto> productos = productoRepository.lockAllByIdInAndComercioId(productoIds, comercio.getId());
