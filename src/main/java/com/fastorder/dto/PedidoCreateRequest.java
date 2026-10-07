@@ -30,4 +30,12 @@ public class PedidoCreateRequest {
     public List<DetallePedidoCreateRequest> getItems() {
         return items;
     }
+
+    public void setProductos(List<DetallePedidoCreateRequest> items) {
+        this.items = items;
+    }
+
+    public void setItems(List<DetallePedidoCreateRequest> items) {
+        this.items = items;
+    }
 }
