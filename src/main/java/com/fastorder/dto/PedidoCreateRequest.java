@@ -21,5 +21,13 @@ public class PedidoCreateRequest {
 
     @NotNull(message = "los productos son obligatorios")
     @Valid
-    private List<DetallePedidoCreateRequest> productos;
+    private List<DetallePedidoCreateRequest> items;
+
+    public List<DetallePedidoCreateRequest> getProductos() {
+        return items;
+    }
+
+    public List<DetallePedidoCreateRequest> getItems() {
+        return items;
+    }
 }
