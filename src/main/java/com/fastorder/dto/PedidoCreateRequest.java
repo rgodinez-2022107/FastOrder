@@ -21,18 +21,28 @@ public class PedidoCreateRequest {
 
     @NotNull(message = "los productos son obligatorios")
     @Valid
+    private List<DetallePedidoCreateRequest> productos;
+
+    @NotNull(message = "los productos son obligatorios")
+    @Valid
     private List<DetallePedidoCreateRequest> items;
 
     public List<DetallePedidoCreateRequest> getProductos() {
+        if (productos != null && !productos.isEmpty()) {
+            return productos;
+        }
         return items;
     }
 
     public List<DetallePedidoCreateRequest> getItems() {
-        return items;
+        if (items != null && !items.isEmpty()) {
+            return items;
+        }
+        return productos;
     }
 
-    public void setProductos(List<DetallePedidoCreateRequest> items) {
-        this.items = items;
+    public void setProductos(List<DetallePedidoCreateRequest> productos) {
+        this.productos = productos;
     }
 
     public void setItems(List<DetallePedidoCreateRequest> items) {
