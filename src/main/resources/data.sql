@@ -4,11 +4,11 @@
 -- Usuarios (passwords BCrypt: Admin123! / Repartidor123! / Cliente123!)
 INSERT INTO usuarios (nombre, direccion, telefono, email, password, rol) VALUES
   ('Administrador General', 'Zona 1, Ciudad de Guatemala', '5555-0001', 'admin@fastorder.com',
-   '$2a$10$RJJcvXcq/ECwZ8TFmf6D8uTRlPS8Ief9XwVjvJxNGNb7UAlU5sjcm', 'ADMIN'),
+   '$2a$10$WQl7H8EztYcMIzM4kDq5M.KZGYa3ftij2P0a4kvk9FbTfnc9N0GuG', 'ADMIN'),
   ('Repartidor Demo', 'Zona 5, Ciudad de Guatemala', '5555-0002', 'repartidor@fastorder.com',
    '$2a$10$5AA2wiTeYhypEMmCFmgkD.hLNXK4SgkIkpTkAI75CTWc79CYRfu8q', 'REPARTIDOR'),
   ('Cliente Demo', 'Zona 10, Ciudad de Guatemala', '5555-0003', 'cliente@fastorder.com',
-   '$2a$10$Lq.1FkLti8ZgY1P3JU4eT.Y/1fQoQp0qVG0m5TJrkCEx3pYjfwVqK', 'CLIENTE')
+   '$2a$10$A.6F9k4cF9dKQzW.EfYLSueBZD.nM.ZNoOFQtAdkXSts.XkBq4rA6', 'CLIENTE')
 ON CONFLICT (email) DO NOTHING;
 
 -- Comercio inicial
